@@ -9,4 +9,6 @@
 
 XCTMain([
     testCase(TestAssertions.allTests),
+    testCase(TestArgumentParser.allTests),
+    testCase(TestFilters.allTests),
 ])
