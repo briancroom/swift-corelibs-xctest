@@ -10,9 +10,13 @@
     import SwiftFoundation
 #endif
 
+// CHECK: Test Suite 'All tests' started at \d+:\d+:\d+\.\d+
+// CHECK: Test Suite '.*\.xctest' started at \d+:\d+:\d+\.\d+
+
+// CHECK: Test Suite 'NotificationHandlerTestCase' started at \d+:\d+:\d+\.\d+
 class NotificationHandlerTestCase: XCTestCase {
-// CHECK: Test Case 'NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsFalse_andFails' started.
-// CHECK: .*/Tests/Functional/Asynchronous/Notifications/Handler/main.swift:23: error: NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsFalse_andFails : Asynchronous wait failed - Exceeded timeout of 0.1 seconds, with unfulfilled expectations: Expect notification 'returnFalse' from any object
+// CHECK: Test Case 'NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsFalse_andFails' started at \d+:\d+:\d+\.\d+
+// CHECK: .*/Tests/Functional/Asynchronous/Notifications/Handler/main.swift:27: error: NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsFalse_andFails : Asynchronous wait failed - Exceeded timeout of 0.1 seconds, with unfulfilled expectations: Expect notification 'returnFalse' from any object
 // CHECK: Test Case 'NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsFalse_andFails' failed \(\d+\.\d+ seconds\).
     func test_notificationNameIsObserved_handlerReturnsFalse_andFails() {
         let _ = self.expectationForNotification("returnFalse", object: nil, handler: {
@@ -23,7 +27,7 @@ class NotificationHandlerTestCase: XCTestCase {
         waitForExpectationsWithTimeout(0.1, handler: nil)
     }
     
-// CHECK: Test Case 'NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsTrue_andPasses' started.
+// CHECK: Test Case 'NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsTrue_andPasses' started at \d+:\d+:\d+\.\d+
 // CHECK: Test Case 'NotificationHandlerTestCase.test_notificationNameIsObserved_handlerReturnsTrue_andPasses' passed \(\d+\.\d+ seconds\).
     func test_notificationNameIsObserved_handlerReturnsTrue_andPasses() {
         let _ = self.expectationForNotification("returnTrue", object: nil, handler: {
@@ -41,8 +45,13 @@ class NotificationHandlerTestCase: XCTestCase {
         ]
     }
 }
+// CHECK: Test Suite 'NotificationHandlerTestCase' failed at \d+:\d+:\d+\.\d+
+// CHECK: \t Executed 2 tests, with 1 failure \(0 unexpected\) in \d+\.\d+ \(\d+\.\d+\) seconds
+
 
 XCTMain([testCase(NotificationHandlerTestCase.allTests)])
 
-// CHECK: Executed 2 tests, with 1 failure \(0 unexpected\) in \d+\.\d+ \(\d+\.\d+\) seconds
-// CHECK: Total executed 2 tests, with 1 failure \(0 unexpected\) in \d+\.\d+ \(\d+\.\d+\) seconds
+// CHECK: Test Suite '.*\.xctest' failed at \d+:\d+:\d+\.\d+
+// CHECK: \t Executed 2 tests, with 1 failure \(0 unexpected\) in \d+\.\d+ \(\d+\.\d+\) seconds
+// CHECK: Test Suite 'All tests' failed at \d+:\d+:\d+\.\d+
+// CHECK: \t Executed 2 tests, with 1 failure \(0 unexpected\) in \d+\.\d+ \(\d+\.\d+\) seconds

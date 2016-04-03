@@ -87,8 +87,12 @@ private func _XCTEvaluateAssertion(assertion: _XCTAssertion, @autoclosure messag
     case .Success:
         return
     default:
-        if let handler = XCTFailureHandler {
-            handler(XCTFailure(message: message(), failureDescription: result.failureDescription(assertion), expected: result.expected, file: file, line: line))
+        if let currentTestCase = XCTCurrentTestCase {
+            currentTestCase.recordFailureWithDescription(
+                "\(result.failureDescription(assertion)) - \(message())",
+                inFile: String(file),
+                atLine: line,
+                expected: result.expected)
         }
     }
 }
